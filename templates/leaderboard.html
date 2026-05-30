@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card wide">
+  <h1>🏆 Ranking นักผจญภัยเศษส่วน</h1>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Rank</th><th>Player</th><th>Grade</th><th>Character</th><th>Level</th><th>Stage</th><th>Correct</th><th>Crystal</th></tr></thead>
+    <tbody>{% for r in rows %}<tr>
+      <td>{{ loop.index }}</td><td>{{ r.name }}</td><td>{{ r.grade }}</td><td>{{ characters[r.character].emoji }} {{ r.character }}</td><td>{{ r.difficulty }}</td><td>{{ r.completed_stage }}/5</td><td>{{ r.correct_total }}/50</td><td><b>💎 {{ r.total_crystal }}</b></td>
+    </tr>{% endfor %}</tbody>
+  </table></div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero game-bg">
+  <div class="hero-text">
+    <p class="eyebrow">Season 1</p>
+    <h1>การผจญภัยในโลกเศษส่วน</h1>
+    <p>ฝ่าด่านคณิตศาสตร์ 5 ด่าน เก็บ Crystal และขึ้นอันดับนักผจญภัยเศษส่วน</p>
+    <div class="hero-actions">
+      <a class="btn primary big" href="{{ url_for('register') }}">เริ่มเล่นเกม</a>
+      <a class="btn ghost big" href="{{ url_for('leaderboard') }}">ดู Ranking</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="big-emoji">🏰</div>
+    <h2>Fraction Quest</h2>
+    <p>10 ข้อต่อด่าน | 30 วินาทีต่อข้อ | Easy / Normal / Hard</p>
+  </div>
+</section>
+<section class="grid four">
+  {% for key, c in characters.items() %}
+  <div class="card character-preview">
+    <div class="char-emoji">{{ c.emoji }}</div>
+    <h3>{{ key }} - {{ c.label }}</h3>
+    <p>{{ c.desc }}</p>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}

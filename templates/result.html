@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card result-card">
+  <div class="big-emoji">🎉</div>
+  <h1>สรุปผลด่านที่ {{ stage }}</h1>
+  <p>ผู้เล่น: <b>{{ characters[player.character].emoji }} {{ player.name }}</b></p>
+  <div class="result-grid">
+    <div><small>ตอบถูก</small><b>{{ score.correct_count }}/10</b></div>
+    <div><small>Crystal ด่านนี้</small><b>💎 {{ score.crystal }}</b></div>
+    <div><small>Crystal รวม</small><b>💎 {{ player.total_crystal }}</b></div>
+  </div>
+  <div class="hero-actions center">
+    {% if next_stage %}<a class="btn primary big" href="{{ url_for('stage', stage=next_stage) }}">ไปด่านต่อไป</a>{% else %}<a class="btn primary big" href="{{ form_url }}" target="_blank">ประเมินความพึงพอใจ</a>{% endif %}
+    <a class="btn ghost big" href="{{ url_for('select_stage') }}">กลับแผนที่</a>
+    <a class="btn ghost big" href="{{ url_for('leaderboard') }}">ดู Ranking</a>
+  </div>
+</div>
+{% endblock %}

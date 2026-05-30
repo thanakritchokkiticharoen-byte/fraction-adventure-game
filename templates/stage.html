@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="game-panel">
+  <div class="battle-header">
+    <div><p class="eyebrow">{{ scene.emoji }} {{ scene.place }}</p><h1>{{ title }}</h1></div>
+    <div class="stat-box"><span>{{ characters[player.character].emoji }}</span><b>{{ player.character }}</b><small>{{ character_bonus.desc }}</small></div>
+  </div>
+  <div class="hud">
+    <div>ข้อ <b id="questionNo">1</b>/10</div>
+    <div class="timer-wrap"><span>⏳</span><div class="timer-bar"><div id="timerBar"></div></div><b id="timerText">{{ seconds }}</b>s</div>
+    <div>Crystal: <b class="crystal" id="crystalText">0</b> 💎</div>
+  </div>
+  <div class="progress"><div id="progressFill"></div></div>
+  <div class="question-card">
+    <div class="monster">🐉</div>
+    <h2 id="questionText">Loading...</h2>
+    <div id="choices" class="choices"></div>
+    <div id="feedback" class="feedback"></div>
+  </div>
+</section>
+<form id="submitForm" method="post" action="{{ url_for('submit_stage') }}">
+  <input type="hidden" name="stage" value="{{ stage }}">
+  <input type="hidden" name="crystal" id="crystalInput">
+  <input type="hidden" name="correct_count" id="correctInput">
+</form>
+<script>
+  window.GAME_QUESTIONS = {{ questions_json | safe }};
+  window.SECONDS_PER_QUESTION = {{ seconds }};
+  window.PLAYER_CHARACTER = "{{ player.character }}";
+</script>
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock %}

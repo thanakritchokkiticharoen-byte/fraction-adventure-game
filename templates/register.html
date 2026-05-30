@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card wide">
+  <p class="eyebrow">สร้าง ID นักผจญภัย</p>
+  <h1>ลงทะเบียนเข้าเกม</h1>
+  {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+  <form method="post" class="form-grid">
+    <label>ชื่อผู้เล่น
+      <input name="name" placeholder="เช่น Nong Season" required>
+    </label>
+    <label>เพศ
+      <select name="gender" required>
+        <option value="">-- เลือก --</option><option>ชาย</option><option>หญิง</option><option>ไม่ระบุ</option>
+      </select>
+    </label>
+    <label>อายุ
+      <input type="number" name="age" min="6" max="13" required>
+    </label>
+    <label>ระดับชั้น
+      <select name="grade" required>
+        <option value="">-- เลือก --</option>
+        {% for g in ['ป.1','ป.2','ป.3','ป.4','ป.5','ป.6'] %}<option>{{ g }}</option>{% endfor %}
+      </select>
+    </label>
+    <div class="full"><h2>เลือกตัวละคร</h2><div class="choice-grid">
+      {% for key, c in characters.items() %}
+      <label class="choice-card"><input type="radio" name="character" value="{{ key }}" {% if loop.first %}checked{% endif %}>
+        <span class="char-emoji">{{ c.emoji }}</span><b>{{ key }}</b><small>{{ c.desc }}</small>
+      </label>
+      {% endfor %}
+    </div></div>
+    <div class="full"><h2>เลือกระดับความยาก</h2><div class="choice-grid three">
+      {% for key, label in difficulties.items() %}
+      <label class="choice-card"><input type="radio" name="difficulty" value="{{ key }}" {% if key=='Normal' %}checked{% endif %}>
+        <b>{{ label }}</b>
+      </label>
+      {% endfor %}
+    </div></div>
+    <button class="btn primary big full" type="submit">เข้าสู่แผนที่ผจญภัย</button>
+  </form>
+</div>
+{% endblock %}

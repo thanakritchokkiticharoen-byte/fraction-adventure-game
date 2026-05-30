@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card wide player-banner">
+  <div>
+    <p class="eyebrow">ยินดีต้อนรับ Season</p>
+    <h1>{{ characters[player.character].emoji }} {{ player.name }}</h1>
+    <p>ตัวละคร: <b>{{ player.character }}</b> | ระดับ: <b>{{ player.difficulty }}</b> | Crystal รวม: <b class="crystal">💎 {{ player.total_crystal }}</b></p>
+  </div>
+  <div class="avatar">{{ characters[player.character].emoji }}</div>
+</section>
+<section class="grid two">
+  {% for stage, title in stage_titles.items() %}
+  <div class="card stage-card">
+    <div class="stage-scene"><span>{{ scenes[stage].emoji }}</span><small>{{ scenes[stage].place }}</small></div>
+    <h2>{{ title }}</h2>
+    {% if stage in completed_stages %}<p class="passed">ผ่านแล้ว ✅</p>{% else %}<p>ยังไม่ผ่าน</p>{% endif %}
+    <a class="btn primary" href="{{ url_for('stage', stage=stage) }}">เข้าเล่นด่านนี้</a>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}

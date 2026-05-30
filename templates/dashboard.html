@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card wide">
+  <div class="between"><div><p class="eyebrow">Teacher Dashboard</p><h1>📊 ภาพรวมคะแนนผู้เล่น</h1></div><a class="btn primary" href="{{ url_for('export_scores_csv') }}">Export CSV</a></div>
+  <section class="grid three dashboard-cards">
+    <div class="mini-card"><small>ผู้เล่นทั้งหมด</small><b>{{ total_players }}</b></div>
+    <div class="mini-card"><small>จำนวนครั้งที่เล่นด่าน</small><b>{{ total_attempts }}</b></div>
+    <div class="mini-card"><small>Crystal เฉลี่ย</small><b>{{ avg_score }}</b></div>
+  </section>
+  <div class="table-wrap"><table>
+    <thead><tr><th>ชื่อ</th><th>เพศ</th><th>อายุ</th><th>ชั้น</th><th>ตัวละคร</th><th>ระดับ</th><th>ผ่านด่าน</th><th>ถูก</th><th>Crystal</th><th>เวลา</th></tr></thead>
+    <tbody>{% for r in rows %}<tr><td>{{ r.name }}</td><td>{{ r.gender }}</td><td>{{ r.age }}</td><td>{{ r.grade }}</td><td>{{ characters[r.character].emoji }} {{ r.character }}</td><td>{{ r.difficulty }}</td><td>{{ r.completed_stage }}/5</td><td>{{ r.correct_total }}/50</td><td>💎 {{ r.total_crystal }}</td><td>{{ r.created_at }}</td></tr>{% endfor %}</tbody>
+  </table></div>
+</div>
+{% endblock %}

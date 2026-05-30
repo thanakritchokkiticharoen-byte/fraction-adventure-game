@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card result-card">
+  <h1>🔳 QR Code เข้าเล่นเกม</h1>
+  <p>ลิงก์สำหรับแชร์ให้เพื่อนทดลองเล่น:</p>
+  <p><b>{{ public_url }}</b></p>
+  <img class="qr" src="{{ url_for('qr_png') }}" alt="QR Code">
+  <p class="muted">หลัง Deploy แล้ว ให้ตั้งค่า PUBLIC_GAME_URL เป็น URL จริงของเว็บ เพื่อให้ QR Code ชี้ไปเว็บออนไลน์</p>
+</div>
+{% endblock %}
